@@ -17,6 +17,18 @@ class Model {
    * @returns {count:#,results:[{*}]} | {*}
    */
   get(_id) {
+    if(_id){
+      console.log('got in get method and check id');
+
+      if(schema.findOne({_id})){
+        // console.log('this is the id obj it found',schema.findOne({_id}));
+        return schema.findOne({_id});
+      }else{
+        console.log('this is the array of objs it found',schema.find())
+        return {count: schema.find().length, results: schema.find()};
+      }
+      }
+    return Promise.reject(new Error('Invalid Id'));
 
   }
 
@@ -26,6 +38,10 @@ class Model {
    * @returns {*}
    */
   create(record) {
+    // Call the appropriate mongoose method to create a new record
+    const newRecord = new schema(record);
+    //this will return a resolved promise into a new product
+    return newRecord.save();
 
   }
 
@@ -36,7 +52,9 @@ class Model {
    * @returns {*}
    */
   update(_id, record) {
-
+    const updateObj = schema.findOne({id:_id});
+    console.log(updateObj);
+    return updateObj.update(record);
   }
 
   /**
@@ -45,6 +63,7 @@ class Model {
    * @returns {*}
    */
   delete(_id) {
+    return schema.deleteOne({id: _id});
 
   }
 

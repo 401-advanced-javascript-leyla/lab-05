@@ -5,19 +5,22 @@
 ### Author: Leyla Li
 
 ### Links and Resources
-* [submission PR](https://github.com/tutuorial-401js/class-00)
-* [travis](https://travis-ci.com/tutuorial-401js/class-00)
-* [front-end](https://tutorial-401js.herokuapp.com/)
+* [submission PR](https://github.com/401-advanced-javascript-leyla/lab-05/pulls)
+* [travis](https://www.travis-ci.com/401-advanced-javascript-leyla/lab-05/builds/123613886)
+
 
 #### Documentation
-* [jsdoc](https://tutorial-401js.herokuapp.com/docs)
+* [jsdoc](N/A)
 
 ### Modules
 #### `pol.js`
 ##### Exported Values and Methods
 
 ###### `isAlive(dead) -> boolean`
-The isAlive() method returns a boolean based on the arg sent in.
+The  create() method returns query based on the arg sent in.
+The  get() method returns query based on the arg sent in.
+The  update() method returns query based on the arg sent in.
+The  delete() method returns query based on the arg sent in.
 
 ### Setup
 #### `.env` requirements
@@ -38,6 +41,3 @@ The isAlive() method returns a boolean based on the arg sent in.
 * Assertions Remaining
   * ... Things I want to tests, but didn't yet.
 
-#### UML
-
-![UML Diagram](whiteboard.jpg)
