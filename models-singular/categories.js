@@ -23,12 +23,14 @@ class Categories {
       if(categoriesSchema.findOne({_id})){
         // console.log('this is the id obj it found',categoriesSchema.findOne({_id}));
         return categoriesSchema.findOne({_id});
+      }
       }else{
-        console.log('this is the array of objs it found',categoriesSchema.find())
-        return {count: categoriesSchema.find().length, results: categoriesSchema.find()};
+        return categoriesSchema.find()
+        .then(result=>{
+          return {count: result.length, results: result}
+        })
       }
-      }
-    return Promise.reject(new Error('Invalid Id'));
+    // return Promise.reject(new Error('Invalid Id'));
   }
 
   create(record) {
@@ -38,19 +40,23 @@ class Categories {
     return newRecord.save();
   }
 
-  update(_id) {
+  update(_id,record) {
     // Call the appropriate mongoose method to update a record
     // console.log('This is in update funtion', _id,updateData);
     // console.log('This is  after updated', categoriesSchema.findByIdAndUpdate({id: _id},updateData));
-    const updateObj = categoriesSchema.findOne({id:_id});
-    console.log(updateObj);
-    return updateObj.update(updateData);
-    // return categoriesSchema.findByIdAndUpdate({id: _id},record, {new:true});
+    // const updateObj = categoriesSchema.findOne({id:_id});
+    // return updateObj
+    //   // .then(updateObj=>{
+    //   //   return updateObj.update(record);
+    //   // })
+    // // console.log(updateObj);
+    //   .then()
+      return categoriesSchema.findByIdAndUpdate(_id,record, {new:true});
   }
 
   delete(_id) {
     // Call the appropriate mongoose method to delete a record
-    return categoriesSchema.deleteOne({id: _id});
+    return categoriesSchema.findByIdAndDelete(_id);
   }
 
 }

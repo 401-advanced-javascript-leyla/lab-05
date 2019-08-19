@@ -52,14 +52,14 @@ describe('Categories Model (Singular)', () => {
     return categories.create(testCategories)
       
       .then((savedCategories)=>{
-        return categories.get('5d576e21ae7cf9402711da3f');
+        return categories.get();
       })
 
       .then(resolvedCategories=>{
         console.log('resolvedCate in the get all test', resolvedCategories);
-      //   Object.keys(testCategories).forEach(key=>{
-      //     expect(resolvedCategories[key]).toEqual(testCategories[key]);
-      // })
+        
+          expect(resolvedCategories.count).toEqual(3);
+      
       });
   });
 
@@ -72,12 +72,14 @@ describe('Categories Model (Singular)', () => {
 
       .then(savedCategories=>{
         // console.log('got in savedCate', categories.update({id: savedCategories._id},{name: 'Peter'}));
-        return categories.update({id: savedCategories._id},{name: 'Banana'});
+        return categories.update(savedCategories._id, {name: 'Banana', description: 'updated'});
       })
-
+      .then((record) => {
+        return categories.get(record._id)
+      })
       .then(updatedCategories=>{
-        // console.log('got in updated last then test', updatedCategories.find({name:'Peter'}));
-        expect (categories.find()).toEqual(updatedCategories.find());
+        // console.log('got in updated last then test', categories.get({name:'Banana'}));
+        expect (updatedCategories.name).toEqual('Banana');
       })
     });
         
@@ -90,11 +92,15 @@ describe('Categories Model (Singular)', () => {
           return categories.create(testCategories)
 
           .then(savedCategories=>{
-            return categories.delete(savedCategories._id);
+            return categories.delete(savedCategories._id)
           })
 
           .then(categoriesAfterDelete=>{
-            expect(categories.find({name: 'fruits'})).toEqual(false);
+            return categories.get()
+          })
+
+          .then(gotCategories=>{
+            expect(gotCategories.count).toEqual(4);
           })
         });
 
