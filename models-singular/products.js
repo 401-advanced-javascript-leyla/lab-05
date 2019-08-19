@@ -24,12 +24,12 @@ class Products {
         // console.log('this is the id obj it found',productsSchema.findOne({_id}));
         return productsSchema.findOne({_id});
       }
-      }else{
-        return productsSchema.find()
+    }else{
+      return productsSchema.find()
         .then(result=>{
-          return {count: result.length, results: result}
-        })
-      }
+          return {count: result.length, results: result};
+        });
+    }
     return Promise.reject(new Error('Invalid Id'));
   }
 

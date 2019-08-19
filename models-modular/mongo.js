@@ -24,12 +24,12 @@ class Model {
         // console.log('this is the id obj it found',schema.findOne({_id}));
         return this.schema.findOne({_id});
       }
-      }else{
-        return this.schema.find()
+    }else{
+      return this.schema.find()
         .then(result=>{
-          return {count: result.length, results: result}
-        })
-      }
+          return {count: result.length, results: result};
+        });
+    }
     return Promise.reject(new Error('Invalid Id'));
 
   }

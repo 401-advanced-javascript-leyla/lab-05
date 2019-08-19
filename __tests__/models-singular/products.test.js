@@ -20,8 +20,8 @@ describe('Products Model (Singular)', () => {
       .then(savedProducts=>{
         Object.keys(testProducts).forEach(key=>{
           expect(savedProducts[key]).toEqual(testProducts[key]);
-        })
-      })
+        });
+      });
 
   //     .catch(err=>console.log(err,'There is something wrong with the create test'));
   });
@@ -33,7 +33,7 @@ describe('Products Model (Singular)', () => {
       quantity: 10,
     };
     return products.create(testProducts)
-      
+
       .then(savedProducts=>{
         return products.get(savedProducts._id);
       })
@@ -42,8 +42,7 @@ describe('Products Model (Singular)', () => {
         Object.keys(testProducts).forEach(key=>{
           expect(resolvedProducts[key]).toEqual(testProducts[key]);
         });
-      })
-      // .catch(err=>{console.log(err)});
+      });
   });
 
   it('can get() all Products', () => {
@@ -53,7 +52,7 @@ describe('Products Model (Singular)', () => {
       quantity: 10,
     };
     return products.create(testProducts)
-      
+
       .then((savedProducts)=>{
         return products.get();
       })
@@ -77,35 +76,35 @@ describe('Products Model (Singular)', () => {
       })
 
       .then((record) => {
-        return products.get(record._id)
+        return products.get(record._id);
       })
 
       .then(updatedProducts=>{
         // console.log('got in updated last then test', updatedProducts.find({name:'Peter'}));
         expect (updatedProducts.name).toEqual('Banana');
+      });
+  });
+
+
+  it('can delete() a product', () => {
+    const testProducts = {
+      name: 'apples',
+      description: 'There will be some apples here',
+      quantity: 10,
+    };
+    return products.create(testProducts)
+
+      .then(savedProducts=>{
+        return products.delete(savedProducts._id);
       })
-    });
-        
-    
-    it('can delete() a product', () => {
-      const testProducts = {
-            name: 'apples',
-            description: 'There will be some apples here',
-            quantity: 10,
-          };
-          return products.create(testProducts)
 
-          .then(savedProducts=>{
-            return products.delete(savedProducts._id);
-          })
+      .then(productsAfterDelete=>{
+        return products.get();
+      })
 
-          .then(productsAfterDelete=>{
-            return products.get()
-          })
-
-          .then(gotProducts=>{
-            expect(gotProducts.count).toEqual(4);
-          })
-        });
+      .then(gotProducts=>{
+        expect(gotProducts.count).toEqual(4);
+      });
+  });
 
 });

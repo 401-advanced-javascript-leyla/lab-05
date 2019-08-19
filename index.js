@@ -15,8 +15,6 @@ const MONGOOSE_URI = 'mongodb+srv://leylali:loisli1155665@cluster0-o9fll.mongodb
 mongoose.connect(MONGOOSE_URI, { useNewUrlParser: true});
 
 // Do some work
-const categories = new Categories;
-const products = new Products;
 
 
 // Disconnect

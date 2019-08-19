@@ -24,12 +24,12 @@ class Categories {
         // console.log('this is the id obj it found',categoriesSchema.findOne({_id}));
         return categoriesSchema.findOne({_id});
       }
-      }else{
-        return categoriesSchema.find()
+    }else{
+      return categoriesSchema.find()
         .then(result=>{
-          return {count: result.length, results: result}
-        })
-      }
+          return {count: result.length, results: result};
+        });
+    }
     // return Promise.reject(new Error('Invalid Id'));
   }
 
@@ -51,7 +51,7 @@ class Categories {
     //   // })
     // // console.log(updateObj);
     //   .then()
-      return categoriesSchema.findByIdAndUpdate(_id,record, {new:true});
+    return categoriesSchema.findByIdAndUpdate(_id,record, {new:true});
   }
 
   delete(_id) {
