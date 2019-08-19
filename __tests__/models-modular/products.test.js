@@ -2,10 +2,10 @@
 
 const supergoose = require('../supergoose.js');
 
-const Products = require('../../models-singular/products');
-let products = new Products();
+const products = require('../../models-modular/products/products');
 
-describe('Products Model (Singular)', () => {
+
+describe('Products Model (modular)', () => {
 
   // How will you handle both the happy path and edge cases in these tests?
 
