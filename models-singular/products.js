@@ -23,10 +23,12 @@ class Products {
       if(productsSchema.findOne({_id})){
         // console.log('this is the id obj it found',productsSchema.findOne({_id}));
         return productsSchema.findOne({_id});
-      }else{
-        console.log('this is the array of objs it found',productsSchema.find())
-        return {count: productsSchema.find().length, results: productsSchema.find()};
       }
+      }else{
+        return productsSchema.find()
+        .then(result=>{
+          return {count: result.length, results: result}
+        })
       }
     return Promise.reject(new Error('Invalid Id'));
   }
@@ -38,19 +40,16 @@ class Products {
     return newRecord.save();
   }
 
-  update(_id) {
+  update(_id,record) {
     // Call the appropriate mongoose method to update a record
     // console.log('This is in update funtion', _id,updateData);
     // console.log('This is  after updated', productsSchema.findByIdAndUpdate({id: _id},updateData));
-    const updateObj = productsSchema.findOne({id:_id});
-    console.log(updateObj);
-    return updateObj.update(updateData);
-    // return productsSchema.findByIdAndUpdate({id: _id},record, {new:true});
+    return productsSchema.findByIdAndUpdate(_id,record, {new:true});
   }
 
   delete(_id) {
     // Call the appropriate mongoose method to delete a record
-    return productsSchema.deleteOne({id: _id});
+    return productsSchema.findByIdAndDelete(_id);
   }
 
 }
